@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(googletest)
+include(benchmark)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -16,6 +17,10 @@ string(APPEND CMAKE_CXX_FLAGS " ${PROJECT_CXX_FLAGS}")
 add_library(two_stack_queue two_stack_queue.h)
 target_include_directories(two_stack_queue INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(two_stack_queue PROPERTIES LINKER_LANGUAGE CXX)
+
+add_executable(queue_benchmark queue_benchmark.cpp)
+target_link_libraries(queue_benchmark two_stack_queue benchmark::benchmark)
+#set_target_properties(queue_benchmark PROPERTIES BUILD_TYPE Release)
 
 enable_testing()
 
